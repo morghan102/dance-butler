@@ -1,3 +1,5 @@
+#!/usr/bin/env pyython
+
 import pytesseract as tess
 # Skyler's path
 tess.pytesseract.tesseract_cmd = r'/usr/local/Cellar/tesseract/4.1.1/bin/tesseract'
@@ -10,6 +12,7 @@ import glob
 i2 = 1
 for filename in glob.glob('./*.jpg'):
     img = Image.open(filename)
+    print('image is ' + str(img))
     text = tess.image_to_string(img)
 
     print('round ' + str(i2) + ', filename is: ' + filename)
@@ -17,7 +20,8 @@ for filename in glob.glob('./*.jpg'):
     i2 = i2 + 1
 
     # get the initial name string, this will be a matchobject
-    name = re.search('Gentleman: ([^\d|\n]+)', text).group()
+    name = re.search('Gentleman: ([^\d|\n]+)', text)
+    name = name.group()
 
     # clean up the text we don't need, we only want name
     name = re.sub('Gentleman: ', '', name)
@@ -48,5 +52,3 @@ for filename in glob.glob('./*.jpg'):
     file.writelines(text)
 
     file.close()
-
-
