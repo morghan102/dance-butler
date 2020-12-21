@@ -2,20 +2,23 @@
 
 import pytesseract as tess
 # Skyler's path
-tess.pytesseract.tesseract_cmd = r'/usr/local/Cellar/tesseract/4.1.1/bin/tesseract'
+# tess.pytesseract.tesseract_cmd = r'/usr/local/Cellar/tesseract/4.1.1/bin/tesseract'
 # Aaron's path
 # tess.pytesseract.tesseract_cmd = r'C:\Users\aaron\AppData\Local\Tesseract-OCR\tesseract.exe'
 
 import re
 from PIL import Image
 import glob
+
+outputCsv = ''
+
 i2 = 1
-for filename in glob.glob('./*.jpg'):
+for filename in glob.glob('./*.png'):
     img = Image.open(filename)
     print('image is ' + str(img))
     text = tess.image_to_string(img)
 
-    print('round ' + str(i2) + ', filename is: ' + filename)
+    print('round ' + str(i2) + ', text is: ' + text)
 
     i2 = i2 + 1
 
@@ -44,11 +47,11 @@ for filename in glob.glob('./*.jpg'):
         i = i + 1
 
     # replace (regex) all spaces (but not newlines) with commas
-    text = '\n'.join(textList)
+    outputCsv = outputCsv + '\n'.join(textList) + '\n'
 
-    # create the CSV
-    file = open('dance_list.csv','w')
+# create the CSV
+file = open('dance_list.csv','w')
 
-    file.writelines(text)
+file.writelines(outputCsv)
 
-    file.close()
+file.close()
