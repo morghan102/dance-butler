@@ -1,6 +1,6 @@
 # Dance Butler
 
-Dance Butler is a small Python script that takes women's dance card entries from images and puts them into a spreadsheet so that we can sort the columns and reverse engineer corresponding _men's_ dance cards automatically.
+Dance Butler is a small Python script that takes men's dance card entries from images and puts them into a spreadsheet so that we can sort the columns and reverse engineer corresponding _women's_ dance cards automatically.
 
 ## A note on formatting
 
